@@ -1,0 +1,46 @@
+package com.luongthuan.demoretrofit
+
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.luongthuan.demoretrofit.models.Post
+import com.luongthuan.demoretrofit.respository.Repository
+import kotlinx.coroutines.launch
+import retrofit2.Response
+
+/**
+ * Created by Luong Thuan on 15/08/2022.
+ */
+class MainViewModel(private val repository: Repository) : ViewModel() {
+
+    val myResponse: MutableLiveData<Response<Post>> = MutableLiveData()
+    val myResponseNumber: MutableLiveData<Response<Post>> = MutableLiveData()
+    val myResponseUserId: MutableLiveData<Response<List<Post>>> = MutableLiveData()
+    val myResponseMap: MutableLiveData<Response<List<Post>>> = MutableLiveData()
+
+    fun getPost() {
+        viewModelScope.launch {
+            val response = repository.getPost()
+            myResponse.value = response
+        }
+    }
+
+    fun getPostNumber(number: Int) {
+        viewModelScope.launch {
+            val response = repository.getPostNumber(number)
+            myResponseNumber.value = response
+        }
+    }
+
+    fun getCustomPost(userInt: Int, sort: String, order: String) {
+        viewModelScope.launch {
+            myResponseUserId.value = repository.getCustomPost(userInt, sort, order)
+        }
+    }
+
+    fun getCustomPostMap(userInt: Int, options: Map<String, String>) {
+        viewModelScope.launch {
+            myResponseMap.value = repository.getCustomPostMap(userInt, options)
+        }
+    }
+}
