@@ -20,6 +20,11 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         /*Send a simple GET request*/
+        viewModel.getPost("121212")
+        viewModel.myResponse.observe(this, Observer { response ->
+            Log.i("thuanoc", "ADD HEADER:  ${response.headers().get("Auth").toString()}")
+        })
+
 //        viewModel.getPost()
 //        viewModel.myResponse.observe(this, Observer { response ->
 //            Log.i("thuanoc", response.body.toString())
@@ -71,7 +76,38 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             }
+
+
+//            viewModel.run {
+//                getCustomPostMap(edtNumber.text.toString().toInt(), options)
+//                myResponseMap.observe(this@MainActivity, Observer { response ->
+//                    if (response.isSuccessful) {
+//                        tvData.text = response.body().toString()
+//                        response.body()?.forEach {
+//                            Log.i(
+//                                "thuanoc",
+//                                "${it.userId.toString()} \n ${it.id.toString()} \n ${it.title.toString()}"
+//                            )
+//                        }
+//                    } else {
+//                        tvData.text = response.code().toString()
+//                    }
+//                })
+//            }
         }
+
+
+//        val myPost = Post(2, 2, "ThuanOc", "DemoRetrofit")
+//        viewModel.pushPost(myPost)
+//        //viewModel.pushPostEncoded(3, 3, "ThuanOc2", "DemoRetrofit2")
+//        viewModel.myResponse.observe(this@MainActivity, Observer { response ->
+//            if (response.isSuccessful) {
+//                Log.i("thuanoc", "PUSH POST:  ${response.body().toString()}")
+//            } else {
+//                Toast.makeText(this@MainActivity, "error", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+
 
     }
 
