@@ -1,6 +1,9 @@
 package com.luongthuan.demoretrofit.api
 
+import com.luongthuan.demoretrofit.models.Photo
 import com.luongthuan.demoretrofit.models.Post
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -69,4 +72,15 @@ interface SimpleApi {
         @Field("title") Title: String,
         @Field("body") body: String
     ): Response<Post>
+
+
+    @GET("{url}")
+    fun searchAllPhotos(
+        @Path("url") url: String?
+    ): Call<List<Photo>>
+
+    @GET("photos/{id}")
+    fun searchPhoto(
+        @Path("id") id: String?
+    ): Call<Photo>
 }

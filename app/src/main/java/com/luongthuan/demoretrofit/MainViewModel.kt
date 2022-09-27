@@ -3,9 +3,12 @@ package com.luongthuan.demoretrofit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.luongthuan.demoretrofit.models.Photo
 import com.luongthuan.demoretrofit.models.Post
 import com.luongthuan.demoretrofit.respository.Repository
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 /**
@@ -17,6 +20,9 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
     val myResponseNumber: MutableLiveData<Response<Post>> = MutableLiveData()
     val myResponseUserId: MutableLiveData<Response<List<Post>>> = MutableLiveData()
     val myResponseMap: MutableLiveData<Response<List<Post>>> = MutableLiveData()
+
+//    val myResponseSearchALL: MutableLiveData<Call<List<Photo>>> = MutableLiveData()
+//    val myResponseSearch: MutableLiveData<Call<Photo>> = MutableLiveData()
 
     fun pushPost(post: Post) {
         viewModelScope.launch {
@@ -65,4 +71,16 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
             myResponseMap.value = repository.getCustomPostMap(userInt, options)
         }
     }
+
+//    fun searchAllPhotos(url: String) {
+//        viewModelScope.launch {
+//            myResponseSearchALL.value = repository.searchAllPhotos(url)
+//        }
+//    }
+//
+//    fun searchPhotos(id: String) {
+//        viewModelScope.launch {
+//            myResponseSearch.value = repository.searchPhoto(id)
+//        }
+//    }
 }

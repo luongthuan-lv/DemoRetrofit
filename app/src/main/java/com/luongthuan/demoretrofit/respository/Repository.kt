@@ -1,7 +1,10 @@
 package com.luongthuan.demoretrofit.respository
 
 import com.luongthuan.demoretrofit.api.RetrofitInstance
+import com.luongthuan.demoretrofit.models.Photo
 import com.luongthuan.demoretrofit.models.Post
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 /**
@@ -39,4 +42,13 @@ class Repository {
     suspend fun pushPostEncoded(userId: Int, id: Int, title: String, body: String): Response<Post> {
         return RetrofitInstance.api.pushPostEncoded(userId, id, title, body)
     }
+
+    /*TEST DATA CACHING*/
+//    suspend fun searchAllPhotos(url: String): Call<List<Photo>> {
+//        return RetrofitInstance.api.searchAllPhotos(url)
+//    }
+//
+//    suspend fun searchPhoto(id: String): Call<Photo> {
+//        return RetrofitInstance.api.searchPhoto(id)
+//    }
 }
